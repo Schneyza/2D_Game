@@ -33,7 +33,7 @@ public class Move : MonoBehaviour
         {
             running = false;
         }
-        var movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        var movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
 
         transform.Translate(movement * currentSpeed * Time.deltaTime);
 
