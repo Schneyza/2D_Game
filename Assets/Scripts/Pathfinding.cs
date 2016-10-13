@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Pathfinding : MonoBehaviour
 {
 
     public TileMap collisionMap;
+    public Sprite pathSprite;
 
     // Use this for initialization
     void Start()
@@ -12,9 +14,9 @@ public class Pathfinding : MonoBehaviour
         int width = (int)collisionMap.mapSize.x;
         int height = (int)collisionMap.mapSize.y;
         int[,] map = new int[width, height];
-        for (int r = 0; r < width - 1; r++)
+        for (int r = 0; r < width; r++)
         {
-            for (int c = 0; c < height - 1; c++)
+            for (int c = 0; c < height; c++)
             {
                 map[r, c] = 0;
                 Transform tile;
@@ -36,6 +38,17 @@ public class Pathfinding : MonoBehaviour
             search.Step();
         }
         print("Search done. Path length " + search.path.Count + " iterations " + search.iterations);
+
+        foreach(var tile in search.path)
+        {
+            GameObject go = new GameObject("Path_Step_" + tile.label);
+            int index = Int32.Parse(tile.label);
+            int posX = index%width * (int)collisionMap.tileSize.x + (int)collisionMap.tileSize.x/2;
+            int posY = index / width * (int)collisionMap.tileSize.y + (int)collisionMap.tileSize.y/2;
+            go.transform.position = new Vector3(posX, -posY, 0);
+            go.AddComponent<SpriteRenderer>();
+            go.GetComponent<SpriteRenderer>().sprite = pathSprite;
+        }
     }
 
 
