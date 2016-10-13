@@ -60,8 +60,24 @@ public class Move : MonoBehaviour
         {
             ChangeAnimationState(4);
         }
+        if (Input.GetButtonUp("Right"))
+        {
+            ChangeAnimationState(5);
+        }
+        if (Input.GetButtonUp("Left"))
+        {
+            ChangeAnimationState(6);
+        }
+        if (Input.GetButtonUp("Up"))
+        {
+            ChangeAnimationState(7);
+        }
+        if (Input.GetButtonUp("Down"))
+        {
+            ChangeAnimationState(0);
+        }
 
-        
+
 
     }
 
