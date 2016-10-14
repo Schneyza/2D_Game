@@ -16162,9 +16162,10 @@ GameObject:
   - 114: {fileID: 400078499}
   - 58: {fileID: 400078498}
   - 50: {fileID: 400078497}
+  - 114: {fileID: 400078503}
   m_Layer: 0
   m_Name: Warrior
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16287,6 +16288,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &400078503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 400078496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d6f6f59843187419fb10f51c0c8b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootDelay: 0.5
+  arrowPrefab: {fileID: 114000010052428120, guid: 51cf336dd7003ae46986bf4937255760,
+    type: 2}
 --- !u!1 &403154432
 GameObject:
   m_ObjectHideFlags: 0
@@ -44032,7 +44047,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 140
+  orthographic size: 100
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

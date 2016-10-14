@@ -6,14 +6,11 @@ public class Move : MonoBehaviour
     public float Speed = 1;
     public float FastSpeed = 3;
     public KeyCode EnableFastSpeedWithKey = KeyCode.LeftShift;
-    public float velX = 0f;
-    public float velY = 0f;
     public float runMultiplier = 2f;
     public bool running;
 
     private Rigidbody2D body2d;
 
-    private Vector3 previousPosition = Vector3.zero;
     private Animator animator;
 
     void Awake()
@@ -38,41 +35,36 @@ public class Move : MonoBehaviour
         transform.Translate(movement * currentSpeed * Time.deltaTime);
 
         animator.speed = running ? runMultiplier : 1;
-
-        Vector3 currentPos = transform.position;
-        if (velX == 0)
-        {
-            ChangeAnimationState(0);
-        }
+        
         if (Input.GetButton("Right"))
         {
             ChangeAnimationState(1);
+        }
+        else if (Input.GetButtonUp("Right"))
+        {
+            ChangeAnimationState(5);
         }
         if (Input.GetButton("Left"))
         {
             ChangeAnimationState(2);
         }
+        else if (Input.GetButtonUp("Left"))
+        {
+            ChangeAnimationState(6);
+        }
         if (Input.GetButton("Up"))
         {
             ChangeAnimationState(3);
+        }
+        else if (Input.GetButtonUp("Up"))
+        {
+            ChangeAnimationState(7);
         }
         if (Input.GetButton("Down"))
         {
             ChangeAnimationState(4);
         }
-        if (Input.GetButtonUp("Right"))
-        {
-            ChangeAnimationState(5);
-        }
-        if (Input.GetButtonUp("Left"))
-        {
-            ChangeAnimationState(6);
-        }
-        if (Input.GetButtonUp("Up"))
-        {
-            ChangeAnimationState(7);
-        }
-        if (Input.GetButtonUp("Down"))
+        else if (Input.GetButtonUp("Down"))
         {
             ChangeAnimationState(0);
         }
