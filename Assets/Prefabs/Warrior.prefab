@@ -45,7 +45,7 @@ GameObject:
   - 50: {fileID: 50000011329860126}
   m_Layer: 0
   m_Name: Warrior
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,8 +187,6 @@ MonoBehaviour:
   Speed: 10
   FastSpeed: 30
   EnableFastSpeedWithKey: 304
-  velX: 0
-  velY: 0
   runMultiplier: 2
   running: 0
 --- !u!124 &124000010807533592

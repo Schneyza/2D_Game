@@ -10,11 +10,11 @@ public class FollowPlayer : MonoBehaviour
     public GameObject player;
     public Sprite pathSprite;
     public int followThreshold;
-    public List<Vector3> waypoints;
-    public int currentWaypoint = 0;
-    public Vector3 nextWaypoint = Vector3.back;
     public float speed = 50;
 
+    private int currentWaypoint = 0;
+    private Vector3 nextWaypoint = Vector3.back;
+    private List<Vector3> waypoints;
     private Search search;
     private Graph graph;
     private int width;
@@ -100,43 +100,24 @@ public class FollowPlayer : MonoBehaviour
         currentWaypoint = 0;
         nextWaypoint = Vector3.back;
         foreach (var tile in search.path)
-        {
-            GameObject go = new GameObject("Path_Step_" + tile.label);
-            //go.transform.SetParent(transform);
-            int index = Int32.Parse(tile.label);
-            int posX = index % width * (int)collisionMap.tileSize.x + (int)collisionMap.tileSize.x / 2;
-            int posY = index / width * (int)collisionMap.tileSize.y + (int)collisionMap.tileSize.y / 2;
-            go.transform.position = new Vector3(posX, -posY, 0);
-            go.AddComponent<SpriteRenderer>();
-            go.GetComponent<SpriteRenderer>().sprite = pathSprite;
-        }
+        //{
+        //    GameObject go = new GameObject("Path_Step_" + tile.label);
+        //    //go.transform.SetParent(transform);
+        //    int index = Int32.Parse(tile.label);
+        //    int posX = index % width * (int)collisionMap.tileSize.x + (int)collisionMap.tileSize.x / 2;
+        //    int posY = index / width * (int)collisionMap.tileSize.y + (int)collisionMap.tileSize.y / 2;
+        //    go.transform.position = new Vector3(posX, -posY, 0);
+        //    go.AddComponent<SpriteRenderer>();
+        //    go.GetComponent<SpriteRenderer>().sprite = pathSprite;
+        //}
 
         search.finished = false;
         playerPos = Vector3.back;
     }
-    // Update is called once per frame
-    void Update()
+
+    void FixedUpdate()
     {
-        if (playerPos == Vector3.back)
-        {
-            playerPos = player.transform.position;
-        }
-        if (Mathf.Abs(Vector3.Distance(playerPos, player.transform.position)) > followThreshold)
-        {
-            foreach (Transform child in transform)
-            {
-                Destroy(child.gameObject);
-            }
-            calculatePathToPlayer();
-        }
-        if (waypoints.Count > 0)
-        {
-            if (nextWaypoint == Vector3.back)
-            {
-                nextWaypoint = waypoints[0];
-            }
-            walk();
-        }
+        checkLos();
     }
 
     List<Vector3> convertPath(List<Node> list)
@@ -163,5 +144,60 @@ public class FollowPlayer : MonoBehaviour
         }
     }
 
+    void updatePathMovement()
+    {
+        //set the new playerposition if it is not set yet
+        if (playerPos == Vector3.back)
+        {
+            playerPos = player.transform.position;
+        }
+
+        //if the player has moved a certain distance, update the path
+        if (Mathf.Abs(Vector3.Distance(playerPos, player.transform.position)) > followThreshold)
+        {
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+            calculatePathToPlayer();
+        }
+
+        //continue walking along the path if the is not reached yet
+        if (waypoints.Count > 0)
+        {
+            if (nextWaypoint == Vector3.back)
+            {
+                nextWaypoint = waypoints[0];
+            }
+            walk();
+        }
+    }
+
+    
+
+    void checkLos()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position);
+        Debug.DrawRay(transform.position, player.transform.position - transform.position);
+        if (hit.transform.tag == "Player")
+        {
+            if(waypoints.Count > 0)
+            {
+                resetPath();
+            }
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
+        else
+        {
+            updatePathMovement();
+        }
+    }
+
+    void resetPath()
+    {
+        waypoints.Clear();
+        currentWaypoint = 0;
+        nextWaypoint = Vector3.back;
+    }
 
 }
