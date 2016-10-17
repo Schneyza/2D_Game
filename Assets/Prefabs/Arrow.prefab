@@ -25,7 +25,7 @@ GameObject:
   - 114: {fileID: 114000010052428120}
   m_Layer: 2
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d660d7bb0ff4242a8273b84e79ae93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velX: 100
+  velX: -100
   velY: 0
 --- !u!212 &212000012172143244
 SpriteRenderer:
