@@ -78,5 +78,4 @@ public class Move : MonoBehaviour
         animator.SetInteger("AnimState", value);
     }
 
-
 }

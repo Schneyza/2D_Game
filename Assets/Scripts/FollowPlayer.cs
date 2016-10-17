@@ -117,7 +117,10 @@ public class FollowPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        checkLos();
+        if(player != null)
+        {
+            checkLos();
+        }
     }
 
     List<Vector3> convertPath(List<Node> list)

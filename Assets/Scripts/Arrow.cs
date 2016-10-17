@@ -23,12 +23,11 @@ public class Arrow : MonoBehaviour {
 	
 	}
 
-    void OnCollisionEnter2D(Collision2D target)
+    void OnTriggerEnter2D(Collider2D target)
     {
-        if (target.gameObject.tag != "Player")
+        if (target.gameObject.tag != "Player" && target.gameObject.tag != "Projectile")
         {
-            Debug.Log("HERE");
-            Destroy(gameObject);
+            Destroy(transform.gameObject);
         }
     }
 }

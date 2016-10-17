@@ -27,7 +27,6 @@ public class Shoot : MonoBehaviour
 
             if (canFire && timeElapsed > shootDelay)
             {
-                CreateArrow(transform.position);
                 timeElapsed = 0;
 
                 if (animState == 5 || animState == 1)
@@ -50,12 +49,11 @@ public class Shoot : MonoBehaviour
                 }
                 if (animState == 0 || animState == 4)
                 {
-
-                    Debug.Log("HERE");
                     rotation = 180;
                     arrowPrefab.velX = 0;
                     arrowPrefab.velY = -100;
                 }
+                CreateArrow(transform.position);
             }
 
             timeElapsed += Time.deltaTime;
