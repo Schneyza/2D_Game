@@ -11,25 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000011414672016}
   m_IsPrefabParent: 1
---- !u!1 &1000010529914348
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000010320331924}
-  - 20: {fileID: 20000011090718532}
-  - 92: {fileID: 92000012453250776}
-  - 124: {fileID: 124000010807533592}
-  - 81: {fileID: 81000011845743916}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1000011414672016
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,6 +24,7 @@ GameObject:
   - 114: {fileID: 114000011706153514}
   - 58: {fileID: 58000014177388008}
   - 50: {fileID: 50000011329860126}
+  - 114: {fileID: 114000013346503870}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Player
@@ -50,19 +32,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000010320331924
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010529914348}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.183029, y: 3.775862, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000014133147438}
-  m_RootOrder: 0
 --- !u!4 &4000014133147438
 Transform:
   m_ObjectHideFlags: 1
@@ -70,47 +39,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011414672016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.88697064, y: 2.344138, z: 0}
+  m_LocalPosition: {x: 305.6, y: -233.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 4000010320331924}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!20 &20000011090718532
-Camera:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010529914348}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 140
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!50 &50000011329860126
 Rigidbody2D:
   serializedVersion: 2
@@ -126,7 +60,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &58000014177388008
 CircleCollider2D:
@@ -142,20 +76,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -3}
   serializedVersion: 2
   m_Radius: 6
---- !u!81 &81000011845743916
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010529914348}
-  m_Enabled: 1
---- !u!92 &92000012453250776
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010529914348}
-  m_Enabled: 1
 --- !u!95 &95000010864717670
 Animator:
   serializedVersion: 3
@@ -184,18 +104,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff7b574e05af674ea55c5e15415dc5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  FastSpeed: 30
+  Speed: 80
+  FastSpeed: 100
   EnableFastSpeedWithKey: 304
   runMultiplier: 2
   running: 0
---- !u!124 &124000010807533592
-Behaviour:
+--- !u!114 &114000013346503870
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010529914348}
+  m_GameObject: {fileID: 1000011414672016}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d6f6f59843187419fb10f51c0c8b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootDelay: 0.5
+  arrowPrefab: {fileID: 114000010052428120, guid: 51cf336dd7003ae46986bf4937255760,
+    type: 2}
 --- !u!212 &212000010441603228
 SpriteRenderer:
   m_ObjectHideFlags: 1
