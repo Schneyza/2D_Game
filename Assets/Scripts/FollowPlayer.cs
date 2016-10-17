@@ -23,6 +23,8 @@ public class FollowPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
+        collisionMap = GameObject.FindWithTag("CollisionMap").GetComponent<TileMap>();
         width = (int)collisionMap.mapSize.x;
         height = (int)collisionMap.mapSize.y;
         int[,] map = new int[width, height];
@@ -181,7 +183,7 @@ public class FollowPlayer : MonoBehaviour
     void checkLos()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position);
-        Debug.DrawRay(transform.position, player.transform.position - transform.position);
+        //Debug.DrawRay(transform.position, player.transform.position - transform.position);
         if (hit.transform.tag == "Player")
         {
             if(waypoints.Count > 0)
