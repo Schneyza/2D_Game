@@ -5,11 +5,13 @@ public class Shoot : MonoBehaviour
 {
 
     public float shootDelay = 0.5f;
-    public Arrow arrowPrefab;
+    public GameObject arrowPrefab;
 
     private Animator animator;
     private float timeElapsed = 0f;
-
+    
+    private float velX;
+    private float velY;
     private float rotation;
 
     void Awake()
@@ -32,26 +34,26 @@ public class Shoot : MonoBehaviour
                 if (animState == 5 || animState == 1)
                 {
                     rotation = 270;
-                    arrowPrefab.velX = 100;
-                    arrowPrefab.velY = 0;
+                    velX = 100;
+                    velY = 0;
                 }
                 if (animState == 6 || animState == 2)
                 {
                     rotation = 90;
-                    arrowPrefab.velX = -100;
-                    arrowPrefab.velY = 0;
+                    velX = -100;
+                    velY = 0;
                 }
                 if (animState == 7 || animState == 3)
                 {
                     rotation = 0;
-                    arrowPrefab.velX = 0;
-                    arrowPrefab.velY = 100;
+                    velX = 0;
+                    velY = 100;
                 }
                 if (animState == 0 || animState == 4)
                 {
                     rotation = 180;
-                    arrowPrefab.velX = 0;
-                    arrowPrefab.velY = -100;
+                    velX = 0;
+                    velY = -100;
                 }
                 CreateArrow(transform.position);
             }
@@ -62,9 +64,10 @@ public class Shoot : MonoBehaviour
 
     public void CreateArrow(Vector2 pos)
     {
-
-        var clone = Instantiate(arrowPrefab, pos, transform.rotation) as Arrow;
-        clone.transform.localScale = transform.localScale;
-        clone.transform.rotation = Quaternion.Euler(0, 0, rotation);        
+        var clone = GameObjectUtil.Instantiate(arrowPrefab, pos, Quaternion.Euler(0, 0, rotation));
+        Arrow arrow = clone.GetComponent<Arrow>();
+        arrow.velX = velX;
+        arrow.velY = velY;
+        clone.transform.localScale = transform.localScale;       
     }
 }

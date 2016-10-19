@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
         if (active)
         {
             var newTransform = transform;
-            Instantiate(prefab, newTransform.position, Quaternion.identity);
+            GameObjectUtil.Instantiate(prefab, newTransform.position);
         }
         StartCoroutine(EnemyGenerator());
     }

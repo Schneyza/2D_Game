@@ -9,13 +9,10 @@ public class Move : MonoBehaviour
     public float runMultiplier = 2f;
     public bool running;
 
-    private Rigidbody2D body2d;
-
     private Animator animator;
 
     void Awake()
     {
-        body2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 

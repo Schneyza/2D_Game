@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Projectile")
         {
-            Destroy(transform.gameObject);
+            GameObjectUtil.Destroy(transform.gameObject);
         }
     }
 
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Player")
         {
-            Destroy(coll.gameObject);
+            GameObjectUtil.Destroy(coll.gameObject);
         }
     }
 }

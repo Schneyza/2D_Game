@@ -23,6 +23,8 @@ GameObject:
   - 50: {fileID: 50000010694171612}
   - 61: {fileID: 61000011299595060}
   - 114: {fileID: 114000010052428120}
+  - 114: {fileID: 114000010807123580}
+  - 114: {fileID: 114000010141464670}
   m_Layer: 2
   m_Name: Arrow
   m_TagString: Projectile
@@ -87,6 +89,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velX: -100
   velY: 0
+--- !u!114 &114000010141464670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013545450844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4b4fd42c020d84b859b82d9d5dc54a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114000010807123580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013545450844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af62a9db47621248993e594d8002e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000012172143244
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootDelay: 0.5
-  arrowPrefab: {fileID: 114000010052428120, guid: 51cf336dd7003ae46986bf4937255760,
+  arrowPrefab: {fileID: 1000013545450844, guid: 51cf336dd7003ae46986bf4937255760,
     type: 2}
 --- !u!212 &212000010441603228
 SpriteRenderer:

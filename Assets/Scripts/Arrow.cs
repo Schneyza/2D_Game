@@ -27,7 +27,7 @@ public class Arrow : MonoBehaviour {
     {
         if (target.gameObject.tag != "Player" && target.gameObject.tag != "Projectile")
         {
-            Destroy(transform.gameObject);
+            GameObjectUtil.Destroy(transform.gameObject);
         }
     }
 }

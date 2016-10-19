@@ -11,8 +11,7 @@ public class FollowPlayer : MonoBehaviour
     public Sprite pathSprite;
     public int followThreshold;
     public float speed = 50;
-
-    private int currentWaypoint = 0;
+    
     private Vector3 nextWaypoint = Vector3.back;
     private List<Vector3> waypoints;
     private Search search;
@@ -99,9 +98,8 @@ public class FollowPlayer : MonoBehaviour
         {
             waypoints = convertPath(search.path);
         }
-        currentWaypoint = 0;
         nextWaypoint = Vector3.back;
-        foreach (var tile in search.path)
+        //foreach (var tile in search.path)
         //{
         //    GameObject go = new GameObject("Path_Step_" + tile.label);
         //    //go.transform.SetParent(transform);
@@ -201,7 +199,6 @@ public class FollowPlayer : MonoBehaviour
     void resetPath()
     {
         waypoints.Clear();
-        currentWaypoint = 0;
         nextWaypoint = Vector3.back;
     }
 
