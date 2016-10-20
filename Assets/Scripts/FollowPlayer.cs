@@ -11,7 +11,7 @@ public class FollowPlayer : MonoBehaviour
     public Sprite pathSprite;
     public int followThreshold;
     public float speed = 50;
-    
+
     private Vector3 nextWaypoint = Vector3.back;
     private List<Vector3> waypoints;
     private Search search;
@@ -66,58 +66,62 @@ public class FollowPlayer : MonoBehaviour
 
     public void calculatePathToPlayer()
     {
-        int startPos;
-        if (waypoints.Count > 0)
+        if (player != null)
         {
-            startPos = posToIndex(waypoints[waypoints.Count - 1]);
-        }
-        else
-        {
-            startPos = posToIndex(transform.position);
-        }
-
-        int playerGridPos = posToIndex(player.transform.position);
-        search.Start(graph.nodes[startPos], graph.nodes[playerGridPos]);
-
-        while (!search.finished)
-        {
-            search.Step();
-        }
-
-        if (waypoints.Count > 0)
-        {
-            foreach (Vector3 point in convertPath(search.path))
+            int startPos;
+            if (waypoints.Count > 0)
             {
-                if (point != waypoints[waypoints.Count - 1])
+                startPos = posToIndex(waypoints[waypoints.Count - 1]);
+            }
+            else
+            {
+                startPos = posToIndex(transform.position);
+            }
+
+            int playerGridPos = posToIndex(player.transform.position);
+            search.Start(graph.nodes[startPos], graph.nodes[playerGridPos]);
+
+            while (!search.finished)
+            {
+                search.Step();
+            }
+
+            if (waypoints.Count > 0)
+            {
+                foreach (Vector3 point in convertPath(search.path))
                 {
-                    waypoints.Add(point);
+                    if (point != waypoints[waypoints.Count - 1])
+                    {
+                        waypoints.Add(point);
+                    }
                 }
             }
-        }
-        else
-        {
-            waypoints = convertPath(search.path);
-        }
-        nextWaypoint = Vector3.back;
-        //foreach (var tile in search.path)
-        //{
-        //    GameObject go = new GameObject("Path_Step_" + tile.label);
-        //    //go.transform.SetParent(transform);
-        //    int index = Int32.Parse(tile.label);
-        //    int posX = index % width * (int)collisionMap.tileSize.x + (int)collisionMap.tileSize.x / 2;
-        //    int posY = index / width * (int)collisionMap.tileSize.y + (int)collisionMap.tileSize.y / 2;
-        //    go.transform.position = new Vector3(posX, -posY, 0);
-        //    go.AddComponent<SpriteRenderer>();
-        //    go.GetComponent<SpriteRenderer>().sprite = pathSprite;
-        //}
+            else
+            {
+                waypoints = convertPath(search.path);
+            }
+            nextWaypoint = Vector3.back;
+            //foreach (var tile in search.path)
+            //{
+            //    GameObject go = new GameObject("Path_Step_" + tile.label);
+            //    //go.transform.SetParent(transform);
+            //    int index = Int32.Parse(tile.label);
+            //    int posX = index % width * (int)collisionMap.tileSize.x + (int)collisionMap.tileSize.x / 2;
+            //    int posY = index / width * (int)collisionMap.tileSize.y + (int)collisionMap.tileSize.y / 2;
+            //    go.transform.position = new Vector3(posX, -posY, 0);
+            //    go.AddComponent<SpriteRenderer>();
+            //    go.GetComponent<SpriteRenderer>().sprite = pathSprite;
+            //}
 
-        search.finished = false;
-        playerPos = Vector3.back;
+            search.finished = false;
+            playerPos = Vector3.back;
+
+        }
     }
 
     void FixedUpdate()
     {
-        if(player != null)
+        if (player != null)
         {
             checkLos();
         }
@@ -176,7 +180,7 @@ public class FollowPlayer : MonoBehaviour
         }
     }
 
-    
+
 
     void checkLos()
     {
@@ -184,7 +188,7 @@ public class FollowPlayer : MonoBehaviour
         //Debug.DrawRay(transform.position, player.transform.position - transform.position);
         if (hit.transform.tag == "Player")
         {
-            if(waypoints.Count > 0)
+            if (waypoints.Count > 0)
             {
                 resetPath();
             }

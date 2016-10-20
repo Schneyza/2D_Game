@@ -10,9 +10,9 @@ public class Shoot : MonoBehaviour
     private Animator animator;
     private float timeElapsed = 0f;
     
-    private float velX;
-    private float velY;
-    private float rotation;
+    public float velX;
+    public float velY;
+    public float rotation;
 
     void Awake()
     {
