@@ -51,7 +51,9 @@ public class FollowPlayer : MonoBehaviour
     public int posToIndex(Vector3 pos)
     {
         float posX = pos.x;
+        posX -= collisionMap.transform.position.x;  //correction if map is not at the origin
         float posY = pos.y;
+        posY -= collisionMap.transform.position.y;  //correction if map is not at the origin
         int tileX = (int)(posX / collisionMap.tileSize.x);
         int tileY = (int)(-posY / collisionMap.tileSize.y);
         return (tileX + tileY * (int)collisionMap.mapSize.x);
@@ -60,7 +62,9 @@ public class FollowPlayer : MonoBehaviour
     public Vector3 indexToPos(int index)
     {
         float posX = (index % (width) * collisionMap.tileSize.x) + collisionMap.tileSize.x / 2;
+        posX += collisionMap.transform.position.x; //correction if map is not at the origin
         float posY = ((index / -(int)collisionMap.mapSize.y) * collisionMap.tileSize.y) - collisionMap.tileSize.y / 2;
+        posY += collisionMap.transform.position.y; //correction if map is not at the origin
         return new Vector3(posX, posY, 0);
     }
 
