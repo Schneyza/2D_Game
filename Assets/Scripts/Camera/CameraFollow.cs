@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        LocatePlayer();
     }
 
     void Update()
@@ -20,5 +20,10 @@ public class CameraFollow : MonoBehaviour
                 transform.position, new Vector3(target.position.x, target.position.y, transform.position.z),
                 Time.deltaTime * smooth);
         }
+    }
+
+    public void LocatePlayer()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 }

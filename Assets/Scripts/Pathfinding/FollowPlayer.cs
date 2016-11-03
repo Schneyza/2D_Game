@@ -22,7 +22,6 @@ public class FollowPlayer : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
         collisionMap = GameObject.FindWithTag("CollisionMap").GetComponent<TileMap>();
         width = (int)collisionMap.mapSize.x;
         height = (int)collisionMap.mapSize.y;
@@ -46,6 +45,12 @@ public class FollowPlayer : MonoBehaviour
         waypoints = new List<Vector3>();
 
         calculatePathToPlayer();
+    }
+
+    void OnEnable()
+    {
+        //Object Pooling requires this to be again, after the player has died
+        player = GameObject.FindWithTag("Player");
     }
 
     public int posToIndex(Vector3 pos)

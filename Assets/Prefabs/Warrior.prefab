@@ -25,6 +25,8 @@ GameObject:
   - 58: {fileID: 58000014177388008}
   - 50: {fileID: 50000011329860126}
   - 114: {fileID: 114000013346503870}
+  - 114: {fileID: 114000013778581908}
+  - 114: {fileID: 114000012055068190}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Player
@@ -109,6 +111,17 @@ MonoBehaviour:
   EnableFastSpeedWithKey: 304
   runMultiplier: 2
   running: 0
+--- !u!114 &114000012055068190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011414672016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af62a9db47621248993e594d8002e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000013346503870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,6 +136,20 @@ MonoBehaviour:
   shootDelay: 0.5
   arrowPrefab: {fileID: 1000013545450844, guid: 51cf336dd7003ae46986bf4937255760,
     type: 2}
+  velX: 0
+  velY: 0
+  rotation: 0
+--- !u!114 &114000013778581908
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011414672016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4202fa355eba024eaaffc4b22131db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000010441603228
 SpriteRenderer:
   m_ObjectHideFlags: 1
