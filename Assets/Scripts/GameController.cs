@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour {
     public GameObject playerPrefab;
     public Vector2 playerPos;
 
-    private GameObject camera;
+    private GameObject cam;
     private bool gameStarted;
     private TimeManager timeManager;
     private Spawner[] spawners;
@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
     {
         spawners = GameObject.FindObjectsOfType<Spawner>();
         timeManager = GetComponent<TimeManager>();
-        camera = GameObject.Find("Camera");
+        cam = GameObject.Find("Camera");
     }
 	// Use this for initialization
 	void Start () {
@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour {
 
         var playerDestroyScript = player.GetComponent<DestroyOnEnemy>();
         playerDestroyScript.DestroyCallback += OnPlayerKilled;
-        camera.GetComponent<CameraFollow>().LocatePlayer();
+        cam.GetComponent<CameraFollow>().LocatePlayer();
         gameStarted = true;
     }
 }

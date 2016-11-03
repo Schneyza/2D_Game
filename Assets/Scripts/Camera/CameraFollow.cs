@@ -7,11 +7,6 @@ public class CameraFollow : MonoBehaviour
     public float smooth = 10.0f;
     private Transform target;
 
-    void Start()
-    {
-        LocatePlayer();
-    }
-
     void Update()
     {
         if (target != null)
