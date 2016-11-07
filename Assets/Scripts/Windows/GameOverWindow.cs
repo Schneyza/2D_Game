@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOverWindow : GenericWindow
 {
@@ -74,8 +75,8 @@ public class GameOverWindow : GenericWindow
         currentStat = 0;
     }
 
-    public void OnNext()
+    public void OnMainMenu()
     {
-        OnNextWindow();
+        SceneManager.LoadSceneAsync(0);
     }
 }

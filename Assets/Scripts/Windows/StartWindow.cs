@@ -1,33 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StartWindow : GenericWindow {
-
-    public Button continueButton;
-
-    public override void Open()
-    {
-        var canContinue = true;
-
-        continueButton.gameObject.SetActive(canContinue);
-
-        if (continueButton.gameObject.activeSelf)
-        {
-            firstSelected = continueButton.gameObject;
-        }
-
-        base.Open();
-    }
-
+   
     public void NewGame()
     {
-        OnNextWindow();
+        SceneManager.LoadSceneAsync(1);
     }
 
-    public void Continue()
+    public void Quit()
     {
-        Debug.Log("Continue Pressed");
+        Application.Quit();
     }
 
     public void Options()

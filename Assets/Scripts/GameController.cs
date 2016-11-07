@@ -8,33 +8,23 @@ public class GameController : MonoBehaviour {
 
     private GameObject cam;
     private bool gameStarted;
-    private TimeManager timeManager;
     private Spawner[] spawners;
     private GameObject player;
+    private WindowManager windowManager;
 
     void Awake()
     {
+        GameObjectUtil.pools.Clear();
         spawners = GameObject.FindObjectsOfType<Spawner>();
-        timeManager = GetComponent<TimeManager>();
         cam = GameObject.Find("Camera");
+        windowManager = GameObject.FindObjectOfType<WindowManager>();
+        windowManager.defaultWindowID = -1;
     }
 	// Use this for initialization
 	void Start () {
         ResetGame();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	    if(!gameStarted && Time.timeScale == 0)
-        {
-            if (Input.anyKeyDown)
-            {
-                timeManager.ManipulateTime(1, 1f);
-                ResetGame();
-            }
-        }
-	}
-
     void OnPlayerKilled()
     {
         foreach(Spawner spawn in spawners)
@@ -44,11 +34,13 @@ public class GameController : MonoBehaviour {
 
         var playerDestroyScript = player.GetComponent<DestroyOnEnemy>();
         playerDestroyScript.DestroyCallback -= OnPlayerKilled;
-        timeManager.ManipulateTime(0, 5.5f);
+
+        windowManager.Open(0);
+
         gameStarted = false;
     }
 
-    void ResetGame()
+    public void ResetGame()
     {
         foreach(Spawner spawn in spawners)
         {
@@ -64,6 +56,11 @@ public class GameController : MonoBehaviour {
         var playerDestroyScript = player.GetComponent<DestroyOnEnemy>();
         playerDestroyScript.DestroyCallback += OnPlayerKilled;
         cam.GetComponent<CameraFollow>().LocatePlayer();
+        if(windowManager.GetComponentInChildren<GameOverWindow>() != null)
+        {
+            windowManager.GetComponentInChildren<GameOverWindow>().Close();
+        }
+
         gameStarted = true;
     }
 }
