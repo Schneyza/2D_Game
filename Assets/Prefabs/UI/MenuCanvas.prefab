@@ -78,7 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2408e3b743bb04d84aff608e290e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windows: []
+  windows:
+  - {fileID: 0}
   currentWindowID: 0
   defaultWindowID: 0
 --- !u!223 &223000012185488132
@@ -92,7 +93,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

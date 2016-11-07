@@ -6,39 +6,35 @@ using UnityEngine.SceneManagement;
 public class GameOverWindow : GenericWindow
 {
 
-    public Text leftStatsLabel;
-    public Text leftStatsValues;
-    public Text rightStatsLabel;
-    public Text rightStatsValues;
+    public Text StatsLabel;
+    public Text StatsValues;
     public Text scoreValue;
     public float statsDelay = 1f;
-    public int totalStats = 6;
-    public int statsPerColumn = 3;
+    public int totalStats = 2;
 
     private int currentStat = 0;
     private float delay = 0;
+    private string[] STATNAMES = { "Time Survived", "Enemies Killed" };
+    private string[] statValues;
+    private GameController gameController;
 
     private void UpdateStatText(Text label, Text value)
     {
-        label.text += "Stat" + currentStat + "\n";
-        value.text += Random.Range(0, 1000).ToString("D4") + "\n";
+        label.text += STATNAMES[currentStat] + "\n";
+        value.text += statValues[currentStat] + "\n";
     }
 
     private void ShowNextStat()
     {
         if(currentStat > totalStats - 1)
         {
-            scoreValue.text = Random.Range(0, 1000000000).ToString("D10");
+            scoreValue.text = gameController.getScore();
             currentStat = -1;
             return;
         }
-        if(currentStat < statsPerColumn)
+        if(currentStat < totalStats)
         {
-            UpdateStatText(leftStatsLabel, leftStatsValues);
-        }
-        else
-        {
-            UpdateStatText(rightStatsLabel, rightStatsValues);
+            UpdateStatText(StatsLabel, StatsValues);
         }
 
         currentStat++;
@@ -56,10 +52,8 @@ public class GameOverWindow : GenericWindow
 
     public void clearText()
     {
-        leftStatsLabel.text = "";
-        leftStatsValues.text = "";
-        rightStatsLabel.text = "";
-        rightStatsValues.text = "";
+        StatsLabel.text = "";
+        StatsValues.text = "";
         scoreValue.text = "";
     }
 
@@ -67,6 +61,10 @@ public class GameOverWindow : GenericWindow
     {
         clearText();
         base.Open();
+        gameController = GameObject.FindObjectOfType<GameController>();
+        statValues = new string[totalStats];
+        statValues[0] = gameController.getTime();
+        statValues[1] = gameController.getKills();
     }
 
     public override void Close()
