@@ -10,6 +10,11 @@ public class StartWindow : GenericWindow {
         SceneManager.LoadSceneAsync(1);
     }
 
+    public void OnMultiplayer()
+    {
+        OnNextWindow();
+    }
+
     public void Quit()
     {
         Application.Quit();
