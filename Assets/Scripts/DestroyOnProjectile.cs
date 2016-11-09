@@ -3,18 +3,18 @@ using System.Collections;
 
 public class DestroyOnProjectile : MonoBehaviour {
 
-    private GameController gc;
-
-    void Start()
-    {
-        gc = GameObject.FindObjectOfType<GameController>();
-    }
+    public delegate void OnEnemyKill();
+    public static event OnEnemyKill EnemyKillCallback;
+    
     void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.gameObject.tag == "Projectile")
         {
-            gc.invcrementKills();
             GameObjectUtil.Destroy(transform.gameObject);
+            if(EnemyKillCallback != null)
+            {
+                EnemyKillCallback();
+            }
         }
     }
 }

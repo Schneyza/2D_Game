@@ -5,20 +5,18 @@ using System;
 
 public class GameController : MonoBehaviour
 {
-
     public GameObject playerPrefab;
     public Vector2 playerPos;
-    public Text survivedText;
-    public Text killsText;
 
-    private float timeSurvived;
-    private int kills;
-    private float score;
     private GameObject cam;
-    private bool gameStarted;
     private Spawner[] spawners;
     private GameObject player;
     private WindowManager windowManager;
+
+    public delegate void OnReset();
+    public static event OnReset ResetCallback;
+    public delegate void OnGameEnd();
+    public static event OnGameEnd GameEndCallback;
 
     void Awake()
     {
@@ -34,89 +32,63 @@ public class GameController : MonoBehaviour
         ResetGame();
     }
 
-    void Update()
-    {
-        if (gameStarted && survivedText != null && killsText != null)
-        {
-            timeSurvived += Time.deltaTime;
-            survivedText.text = "SURVIVED: " + formatTime(timeSurvived);
-            killsText.text = "KILLS: " + kills.ToString();
-        }
-    }
-
     void OnPlayerKilled()
     {
-        foreach (Spawner spawn in spawners)
+        if (GameEndCallback != null)
         {
-            spawn.active = false;
+            GameEndCallback();
         }
+        ActivateSpawners(false);
 
+        //unregister OnPlayerKilled from DestroyCallback to avoid memory leaks
         var playerDestroyScript = player.GetComponent<DestroyOnEnemy>();
         playerDestroyScript.DestroyCallback -= OnPlayerKilled;
 
-        survivedText.gameObject.SetActive(false);
-        killsText.gameObject.SetActive(false);
-        score = (timeSurvived * kills);
-
         windowManager.Open(0);
-
-        gameStarted = false;
     }
 
     public void ResetGame()
     {
-        foreach (Spawner spawn in spawners)
+        if (ResetCallback != null)
         {
-            spawn.active = true;
+            ResetCallback();
         }
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in enemies)
-        {
-            GameObjectUtil.Destroy(enemy);
-        }
-        player = GameObjectUtil.Instantiate(playerPrefab, new Vector3(playerPos.x, playerPos.y, 0));
-
-        var playerDestroyScript = player.GetComponent<DestroyOnEnemy>();
-        playerDestroyScript.DestroyCallback += OnPlayerKilled;
-        cam.GetComponent<CameraFollow>().LocatePlayer();
-
-        survivedText.gameObject.SetActive(true);
-        killsText.gameObject.SetActive(true);
-        timeSurvived = 0f;
-        kills = 0;
+        ActivateSpawners(true);
+        RemoveEnemies();
+        ResetPlayer();
 
         if (windowManager.GetComponentInChildren<GameOverWindow>() != null)
         {
             windowManager.GetComponentInChildren<GameOverWindow>().Close();
         }
-
-        gameStarted = true;
     }
 
-    string formatTime(float value)
+    void ActivateSpawners(bool value)
     {
-        TimeSpan t = TimeSpan.FromSeconds(value);
-
-        return string.Format("{0:D2}:{1:D2}", t.Minutes, t.Seconds);
+        foreach (Spawner spawn in spawners)
+        {
+            spawn.active = true;
+        }
     }
 
-    public void invcrementKills()
+    void RemoveEnemies()
     {
-        kills++;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            GameObjectUtil.Destroy(enemy);
+        }
     }
 
-    public string getTime()
+    void ResetPlayer()
     {
-        return formatTime(timeSurvived);
+        player = GameObjectUtil.Instantiate(playerPrefab, new Vector3(playerPos.x, playerPos.y, 0));
+
+        //Register OnPlayerKilled to execute when DestroyCallback in DestroyOnEnemy script is called
+        var playerDestroyScript = player.GetComponent<DestroyOnEnemy>();
+        playerDestroyScript.DestroyCallback += OnPlayerKilled;
+        cam.GetComponent<CameraFollow>().LocatePlayer();
     }
 
-    public string getKills()
-    {
-        return kills.ToString();
-    }
 
-    public string getScore()
-    {
-        return((int)score).ToString();
-    }
 }
